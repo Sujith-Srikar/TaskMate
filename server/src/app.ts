@@ -1,0 +1,21 @@
+import express from 'express';
+const app = express();
+import connectDB from './config/db.config';
+import authRoutes from './routes/auth';
+import taskRoutes from './routes/task';
+const cors = require('cors');
+import cookieParser from "cookie-parser";
+
+require("dotenv").config();
+const PORT = process.env.PORT;
+
+app.use(express.json())
+app.use(cors())
+
+app.use('/auth',authRoutes);
+app.use('/task',taskRoutes);
+
+app.listen(PORT, ()=>{
+    connectDB();
+    console.log(`Server started on port:${PORT}`);
+});
