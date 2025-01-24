@@ -27,7 +27,7 @@ export const register = async (req: Request, res: Response) => {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string,{
             expiresIn: "1d"
         });
-        res.cookie("authToken", token, {httpOnly: true});
+        res.cookie("authToken", token);
         return res.status(201).json('User created successfully');
     }
     catch(err){
@@ -48,7 +48,7 @@ export const login =  async (req: Request, res: Response) => {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {
             expiresIn: "1d"
         })
-        res.cookie("authToken", token, {httpOnly: true});
+        res.cookie("authToken", token);
         res.status(200).json('User logged in successfully');
     } catch (err) {
       console.error(err);
