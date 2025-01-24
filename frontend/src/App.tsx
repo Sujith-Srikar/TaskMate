@@ -1,10 +1,24 @@
 import {Home, Login, SignUp, Dashboard} from "./pages/index";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
 
 function App() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("authToken="))
+      ?.split("=")[1];
+    if (token) {
+      navigate("/dashboard");
+    }
+  },[navigate])
+  
   return (
-    <Router>
+    <>
       <div>
         <Toaster />
       </div>
@@ -14,7 +28,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 

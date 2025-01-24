@@ -48,6 +48,7 @@ export const login =  async (req: Request, res: Response) => {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {
             expiresIn: "1d"
         })
+        res.cookie("authToken", token, {httpOnly: true});
         res.status(200).json('User logged in successfully');
     } catch (err) {
       console.error(err);
@@ -57,8 +58,8 @@ export const login =  async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
     try {
-        localStorage.removeItem("authToken");
-        return res.status(200).json({ message: "Logout successful" });
+        res.cookie("authToken", "", {httpOnly: true});
+        return res.status(200).json({ message: "Loged Out successful" });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }

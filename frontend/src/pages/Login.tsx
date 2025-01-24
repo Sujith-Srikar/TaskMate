@@ -8,17 +8,22 @@ function Login() {
 
     function onSubmitHandle(e: React.FormEvent<HTMLFormElement>) {
       e.preventDefault();
-      toast.promise(axios.post("http://localhost:8000/auth/login", userData), {
-        loading: "Saving... Please wait!",
-        success: (res) => (
-          <b>{res.data ? res.data : "User LogedIn successfully!"}</b>
-        ),
-        error: (err) => (
-          <b>
-            {err.response ? err.response.data.message : "Could not register."}
-          </b>
-        ),
-      });
+      toast.promise(
+        axios.post("http://localhost:8000/auth/login", userData, {
+          withCredentials: true,
+        }),
+        {
+          loading: "Saving... Please wait!",
+          success: (res) => (
+            <b>{res.data ? res.data : "User LogedIn successfully!"}</b>
+          ),
+          error: (err) => (
+            <b>
+              {err.response ? err.response.data.message : "Could not register."}
+            </b>
+          ),
+        }
+      );
     }
 
   return (

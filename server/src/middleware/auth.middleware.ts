@@ -9,7 +9,6 @@ const authMiddleware = async (
 ) => {
   try {
     const token = req.cookies.get("authToken");
-    console.log(token);
     if (!token) return res.status(401).json({ message: "Unauthorized" });
     const decodeToken = jwt.verify(token, process.env.JWT_SECRET as string);
     req.user = decodeToken;
