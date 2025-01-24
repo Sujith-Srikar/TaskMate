@@ -1,5 +1,5 @@
 import {Home, Login, SignUp, Dashboard} from "./pages/index";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 
