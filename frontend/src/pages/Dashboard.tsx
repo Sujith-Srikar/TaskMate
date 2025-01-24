@@ -7,19 +7,22 @@ function Dashboard() {
 
   function handleButton(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    toast.promise(axios.post("http://localhost:8000/auth/logout"), {
-      loading: "Loging out... Please wait! ",
-      success: (res) => {
-        return <b>{res.data ? res.data : "User LogedOut successfully!"}</b>;
-      },
-      error: (err) => {
-        return (
-          <b>
-            {err.response ? err.response.data.message : "Could not register."}
-          </b>
-        );
-      },
-    });
+    toast.promise(
+      axios.post("https://taskmate-baib.onrender.com/auth/logout"),
+      {
+        loading: "Loging out... Please wait! ",
+        success: (res) => {
+          return <b>{res.data ? res.data : "User LogedOut successfully!"}</b>;
+        },
+        error: (err) => {
+          return (
+            <b>
+              {err.response ? err.response.data.message : "Could not register."}
+            </b>
+          );
+        },
+      }
+    );
   }
 
   return (

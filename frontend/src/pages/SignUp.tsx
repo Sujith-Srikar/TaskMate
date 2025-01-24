@@ -9,13 +9,14 @@ function SignUp() {
     function onSubmitHandle(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         toast.promise(
-          axios.post("http://localhost:8000/auth/signup", userData),
+          axios.post(
+            "https://taskmate-baib.onrender.com/auth/signup",
+            userData
+          ),
           {
             loading: "Saving... Please wait!",
             success: (res) => (
-              <b>
-                {res.data ? res.data : "User registered successfully!"}
-              </b>
+              <b>{res.data ? res.data : "User registered successfully!"}</b>
             ),
             error: (err) => (
               <b>
